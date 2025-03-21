@@ -39,6 +39,10 @@ class StatisticalCalculator:
         self.main_canvas.grid_rowconfigure(0, weight=1)
         self.main_canvas.grid_columnconfigure(0, weight=1)
         
+        # 添加退出按钮
+        exit_button = ttk.Button(self.root, text='退出', command=self.root.destroy)
+        exit_button.grid(row=0, column=2, sticky=(tk.S, tk.E), padx=5, pady=5)
+        
         # 设置字体
         self.title_font = Font(family='Microsoft YaHei', size=12, weight='bold')
         self.normal_font = Font(family='Microsoft YaHei', size=10)
@@ -217,6 +221,11 @@ class StatisticalCalculator:
         for item in self.result_tree.get_children():
             self.result_tree.delete(item)
 
+        # 创建运算中标识
+        calculating_label = ttk.Label(self.main_frame, text='运算中...', font=self.normal_font)
+        calculating_label.grid(row=3, column=0, columnspan=2, pady=5)
+        self.root.update()
+
         # 将众数操作移到最后
         mode_op = None
         other_ops = []
@@ -263,6 +272,9 @@ class StatisticalCalculator:
             result = ', '.join([f'{x}' for x in modes])
             result = '\n'.join([result[i:i+50] for i in range(0, len(result), 50)])
             self.result_tree.insert('', tk.END, values=(mode_op, result))
+
+        # 移除运算中标识
+        calculating_label.destroy()
 
 def main():
     root = tk.Tk()
