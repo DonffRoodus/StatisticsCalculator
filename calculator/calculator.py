@@ -8,7 +8,7 @@ class StatisticalCalculator:
     def __init__(self, root):
         self.root = root
         self.root.title('统计计算器')
-        self.root.geometry('800x600')
+        self.root.geometry('1000x600')
         
         # 创建主滚动区域
         # 创建主滚动区域
